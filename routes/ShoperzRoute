@@ -1,0 +1,82 @@
+//import express //initialize expressroute to variable with express.Router()//import the model
+const express = require("express");
+const ShoperzRoute = express.Router(); //create new router object to handle request
+const shoperzSchema = require("../model/ShopModel");
+
+//with expressroute (variable) set route with post method,first specify path then create model
+//with model pass data from req.body
+ShoperzRoute.post("/addproduct", (req, res) => {
+  const data = new shoperzSchema({ //model class of mongo db
+    name: req.body.name,  //req.body contains form data
+    category: req.body.category,
+    price: req.body.price,
+    description: req.body.description,
+  });
+
+  data
+    .save()
+    .then(() => {
+      res.redirect("/api/shop/products");
+      console.log("added data");
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+ShoperzRoute.get("/products", (req, res) => {
+  shoperzSchema
+    .find()
+    .then((data) => res.render("Products", { data }))
+    .catch((error) => res.json(error));
+});
+
+ShoperzRoute.post("/deleteProduct/:id", (req, res) => {
+  shoperzSchema
+    .deleteOne({
+      _id: req.params.id,
+    })
+    .then(() => {
+      res.redirect("/api/shop/products");
+      console.log("deleted data");
+    })
+    .catch((error) => console.log(error));
+});
+
+ShoperzRoute.get("/editProductById/:id", (req, res) => {
+ shoperzSchema
+    .findOne({
+      _id: req.params.id,
+    })
+    .then((data) => {
+      res.render("UpdateProduct", { data });
+    })
+    .catch((error) => console.log(error));
+});
+
+ShoperzRoute.post("/updateProduct/:id", (req, res) => {
+  const data = new shoperzSchema({
+    _id: req.params.id,
+    name: req.body.name,
+    category: req.body.category,
+    price: req.body.price,
+    description: req.body.description,
+  });
+  data
+    .updateOne(data)
+    .then(() => {
+      // res.status(200).json({
+      //   success: true,
+      //   error: false,
+      //   message: "data updated successfully!",
+      // });
+
+      res.redirect("/api/shop/products");
+      console.log("updated data");
+    })
+    .catch((error) => {
+      res.status(400).json({
+        error: error,
+      });
+    });
+});
+module.exports = ShoperzRoute;

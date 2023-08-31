@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Example Shop</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+    <%- include("components/Header") %>
+    <div
+    class="text-center bg-image"
+    style="
+      background-image: url('images/banner1.jpg');
+      height: 100vh;   
+    "
+  >
+    <div class="mask">
+      <div class="d-flex float-start  align-items-center h-100">
+        <div class="text-white">
+          <h3 class="mb-2">Shoperz</h1>
+          <h4 class="mb-2">Lorem ipsum dolor sit tempore quaerat sapiente?</h4>
+          <a class="btn btn-outline-light btn-lg" href="#!" role="button"
+          >shop</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+    <%- include("components/Footer") %> 
+  
+</body>
+</html>

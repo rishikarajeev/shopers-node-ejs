@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+   
+    <%- include("components/Header") %>  
+    <section class="p-2">
+        <div class="text-center p-1"><h1>Our Products</h1></div>
+        <div class="container-fluid text-center">
+         
+            <ul class="list-group list-group-horizontal">
+                <% data.forEach((s)=>{ %> 
+                <li class="list-group-item" id="ëmployee_name">
+                   
+                    <div class="card mt-5">
+                      <img
+                      src="<%= s.image %>"
+                      class="card-img-top p-3 "
+                      alt="Fissure in Sandstone"
+                    />
+                      <div class="card-body">
+                        <h5 class="card-title" name="category"><%= s.category %></h5>
+                        <h5 class="card-title"name="description"><%= s.description %></h5>
+                   
+                      
+                      </div>
+                    </div>
+                 </li>
+                <% }) %>
+              </ul>
+             
+  
+   
+          </div>
+     
+      </section>
+    
+      <%- include("components/Footer") %> 
+</body>
+</html>
